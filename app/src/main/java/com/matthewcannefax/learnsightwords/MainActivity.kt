@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -68,12 +69,20 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
         }
     }
 
+    private fun returnFabAnimation(){
+        fab.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic_empty))
+    }
+
     //animate the mic button here
     override fun onReadyForSpeech(p0: Bundle?) {
+        fab.setBackgroundColor(ContextCompat.getColor(this, R.color.listeningRed))
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic))
     }
 
     //animate the mic button here too
     override fun onEndOfSpeech() {
+        returnFabAnimation()
     }
 
     //region unused speech recognition methods
@@ -95,6 +104,7 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     }
 
     override fun onError(p0: Int) {
+        returnFabAnimation()
         Toast.makeText(this,
             when(p0){
                 SpeechRecognizer.ERROR_AUDIO -> "audio"

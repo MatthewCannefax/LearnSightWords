@@ -10,7 +10,7 @@ class WordHelper {
 
         public fun getWordList(): ArrayList<Word>{
 
-            wordList = SampleWords.getWordList()
+            wordList = SampleWords.getLevelOne().levelWordList
 
             return wordList
         }

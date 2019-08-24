@@ -1,10 +1,15 @@
 package com.matthewcannefax.learnsightwords.sample
 
+import com.matthewcannefax.learnsightwords.word.Level
 import com.matthewcannefax.learnsightwords.word.Word
 
 class SampleWords {
     companion object{
         private val wordList= arrayListOf<Word>()
+
+        fun getLevelOne(): Level{
+            return Level("Level 1", 1, getWordList())
+        }
 
         fun getWordList(): ArrayList<Word>{
             wordList.add(Word("the"))
