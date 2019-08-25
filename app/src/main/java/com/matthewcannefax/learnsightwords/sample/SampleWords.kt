@@ -5,13 +5,15 @@ import com.matthewcannefax.learnsightwords.word.Word
 
 class SampleWords {
     companion object{
-        private val wordList= arrayListOf<Word>()
 
         fun getLevelOne(): Level{
-            return Level("Level 1", 1, getWordList())
+            var wordList = getWordList()
+            var level: Level = Level("Level 1", 1, wordList)
+            return level
         }
 
         fun getWordList(): ArrayList<Word>{
+            val wordList = ArrayList<Word>()
             wordList.add(Word("the"))
             wordList.add(Word("to"))
             wordList.add(Word("and"))

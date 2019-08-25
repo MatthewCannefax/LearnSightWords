@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.matthewcannefax.learnsightwords.speech.SpeechHelper
 
-class WordViewModel(app: Application) : AndroidViewModel(app) {
+class WordViewModel(app: android.app.Application) : AndroidViewModel(app) {
     val currentSightWord = MutableLiveData<Word>()
     var wordList = arrayListOf<Word>()
     var currentIndex = 0

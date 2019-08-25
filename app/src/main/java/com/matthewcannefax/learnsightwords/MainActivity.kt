@@ -1,6 +1,7 @@
 package com.matthewcannefax.learnsightwords
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer
@@ -70,13 +71,11 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     }
 
     private fun returnFabAnimation(){
-        fab.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
         fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic_empty))
     }
 
     //animate the mic button here
     override fun onReadyForSpeech(p0: Bundle?) {
-        fab.setBackgroundColor(ContextCompat.getColor(this, R.color.listeningRed))
         fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic))
     }
 

@@ -11,6 +11,10 @@ class Level {
 
     var levelMastered = false
 
-    constructor(name: String, id: Long, wordList: ArrayList<Word>)
+    constructor(name: String, id: Long, wordList: ArrayList<Word>){
+        levelName = name
+        levelID = id
+        levelWordList = wordList
+    }
 
 }
