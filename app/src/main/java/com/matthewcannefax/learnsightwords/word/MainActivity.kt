@@ -1,12 +1,9 @@
-package com.matthewcannefax.learnsightwords
+package com.matthewcannefax.learnsightwords.word
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -14,11 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.matthewcannefax.learnsightwords.R
 import com.matthewcannefax.learnsightwords.settings.SettingsActivity
 import com.matthewcannefax.learnsightwords.speech.SpeechHelper
-import com.matthewcannefax.learnsightwords.word.WordViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -77,12 +73,16 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     }
 
     private fun returnFabAnimation(){
-        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic_empty))
+        fab.setImageDrawable(ContextCompat.getDrawable(this,
+            R.drawable.ic_mic_empty
+        ))
     }
 
     //animate the mic button here
     override fun onReadyForSpeech(p0: Bundle?) {
-        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_mic))
+        fab.setImageDrawable(ContextCompat.getDrawable(this,
+            R.drawable.ic_mic
+        ))
     }
 
     //animate the mic button here too
