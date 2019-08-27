@@ -7,11 +7,12 @@
     tools:context=".settings.SettingsActivity">
 
 
-
     <Spinner
         android:id="@+id/level_spinner"
         android:layout_width="161dp"
         android:layout_height="35dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,20 +20,41 @@
         android:id="@+id/add_level_button"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/add_a_new_level"
         android:src="@drawable/ic_add_circle_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toEndOf="@+id/level_spinner"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/new_word_edittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/level_spinner" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <EditText
+        android:id="@+id/new_word_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_word"
+        app:layout_constraintBottom_toTopOf="@+id/add_word_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/add_word_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/fab"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

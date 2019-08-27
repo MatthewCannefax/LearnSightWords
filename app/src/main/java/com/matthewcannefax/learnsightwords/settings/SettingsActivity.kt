@@ -2,10 +2,7 @@ package com.matthewcannefax.learnsightwords.settings
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.matthewcannefax.learnsightwords.R
 import com.matthewcannefax.learnsightwords.word.SightWordLevel
+import com.matthewcannefax.learnsightwords.word.Word
 import kotlinx.android.synthetic.main.activity_main.*
 
 import java.util.logging.Level
@@ -31,6 +29,14 @@ class SettingsActivity : AppCompatActivity() {
 
     private val wordRecyclerView by lazy {
         findViewById<RecyclerView>(R.id.word_recyclerview)
+    }
+
+    private val newWordEditText by lazy {
+        findViewById<EditText>(R.id.new_word_edittext)
+    }
+
+    private val addNewWordButton by lazy {
+        findViewById<Button>(R.id.add_word_button)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +67,13 @@ class SettingsActivity : AppCompatActivity() {
 
         addLevelButton.setOnClickListener{view ->
             settingsViewModel.createNewLevel("Level " + (settingsViewModel.levelList.size + 1))
+        }
+
+        addNewWordButton.setOnClickListener{view ->
+            if(!newWordEditText.text.toString().equals("")){
+                settingsViewModel.currentLevel.value?.levelWordList?.add(Word(newWordEditText.text.toString()))
+                wordRecyclerView.adapter?.notifyDataSetChanged()
+            }
         }
 
     }

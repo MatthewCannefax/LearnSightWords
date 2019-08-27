@@ -5,6 +5,7 @@
     <string name="add_a_new_level">add a new level</string>
     <string name="delete_this_word">delete this word</string>
     <string name="add">+</string>
+    <string name="new_word">New Word</string>
 
 
 </resources>
