@@ -1,15 +1,17 @@
 package com.matthewcannefax.learnsightwords.sample
 
-import com.matthewcannefax.learnsightwords.word.Level
+import com.matthewcannefax.learnsightwords.word.SightWordLevel
 import com.matthewcannefax.learnsightwords.word.Word
 
 class SampleWords {
     companion object{
 
-        fun getLevelOne(): Level{
+        fun getLevelOne(): ArrayList<SightWordLevel>{
+            var levelList: ArrayList<SightWordLevel> = ArrayList()
             var wordList = getWordList()
-            var level: Level = Level("Level 1", 1, wordList)
-            return level
+            var level: SightWordLevel = SightWordLevel("Level 1", 1, wordList)
+            levelList.add(level)
+            return levelList
         }
 
         fun getWordList(): ArrayList<Word>{

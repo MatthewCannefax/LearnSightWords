@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.matthewcannefax.learnsightwords.settings.SettingsActivity
 import com.matthewcannefax.learnsightwords.speech.SpeechHelper
 import com.matthewcannefax.learnsightwords.word.WordViewModel
 
@@ -56,10 +57,15 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        val settingsIntent = Intent(this, SettingsActivity::class.java)
+        var b: Boolean = false
+        when (item.itemId) {
+            R.id.action_settings ->
+                startActivity(settingsIntent)
+            else -> b = super.onOptionsItemSelected(item)
         }
+
+        return b;
     }
 
 

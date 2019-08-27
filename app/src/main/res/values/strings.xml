@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LearnSightWords</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="add_a_new_level">add a new level</string>
+    <string name="delete_this_word">delete this word</string>
+    <string name="add">+</string>
+
+
 </resources>
