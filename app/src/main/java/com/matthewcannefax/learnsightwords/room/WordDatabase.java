@@ -29,6 +29,7 @@ public abstract class WordDatabase extends RoomDatabase {
                             WordDatabase.class, WORD_DATABSE_NAME)
                             .allowMainThreadQueries()
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
 
