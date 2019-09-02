@@ -70,18 +70,13 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         addNewWordButton.setOnClickListener{view ->
-            if(!newWordEditText.text.toString().equals("")){
-                settingsViewModel.currentLevel.value?.levelWordList?.add(Word(newWordEditText.text.toString()))
-                wordRecyclerView.adapter?.notifyDataSetChanged()
-            }
+
         }
 
     }
 
     private fun setRecyclerAdapter(it: SightWordLevel) {
-        val wordRecyclerAdapter: WordRecyclerAdapter = WordRecyclerAdapter(it.levelWordList)
-        wordRecyclerView.adapter = wordRecyclerAdapter
-        wordRecyclerView.layoutManager = LinearLayoutManager(this)
+
     }
 
 

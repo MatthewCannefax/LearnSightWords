@@ -17,7 +17,7 @@ class SettingsViewModel(app: android.app.Application) : AndroidViewModel(app) {
     }
 
     fun createNewLevel(name: String){
-        levelList.add(SightWordLevel(name))
+        levelList.add(SightWordLevel())
         currentLevel.value = levelList.get(levelList.size - 1)
     }
 }

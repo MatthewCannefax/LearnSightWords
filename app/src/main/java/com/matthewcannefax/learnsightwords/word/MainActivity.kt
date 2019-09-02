@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
             wordView.text = it.word
         })
 
+
+
         fab.setOnClickListener { view ->
             SpeechHelper.getSpeechInput(this).setRecognitionListener(this)
         }

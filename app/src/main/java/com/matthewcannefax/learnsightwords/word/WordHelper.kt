@@ -9,7 +9,7 @@ class WordHelper {
 
         public fun getWordList(): ArrayList<Word>{
 
-            return SampleWords.getLevelOne().get(0).levelWordList
+            return SampleWords.getWordList()
         }
 
         public fun getIndex(): Int{
