@@ -3,6 +3,7 @@ package com.matthewcannefax.learnsightwords.word
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import com.matthewcannefax.learnsightwords.room.WORD_LEVEL_COLUMN
 import com.matthewcannefax.learnsightwords.room.WORD_TABLE_NAME
@@ -13,7 +14,6 @@ import java.util.logging.Level
 class Word(word: String) {
 
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = WORD_WORD_COLUMN)
     var word: String = word
 
@@ -24,7 +24,4 @@ class Word(word: String) {
     fun getLevelString(): String{
         return String.format("Level %s", level)
     }
-
-
-//    var level: SightWordLevel = SightWordLevel()
 }

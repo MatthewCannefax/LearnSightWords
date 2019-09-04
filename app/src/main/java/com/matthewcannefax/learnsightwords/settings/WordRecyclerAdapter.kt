@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.matthewcannefax.learnsightwords.R
 import com.matthewcannefax.learnsightwords.word.Word
 
-class WordRecyclerAdapter(val wordList: ArrayList<Word>) : RecyclerView.Adapter<WordRecyclerAdapter.WordViewHolder>() {
+class WordRecyclerAdapter(val wordList: List<Word>) : RecyclerView.Adapter<WordRecyclerAdapter.WordViewHolder>() {
 
 
 

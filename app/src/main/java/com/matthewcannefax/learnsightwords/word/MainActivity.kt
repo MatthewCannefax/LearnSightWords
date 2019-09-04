@@ -20,9 +20,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RecognitionListener{
 
-
+    //view model to handle all the nonUI code
     private lateinit var wordViewModel: WordViewModel
 
+    //the textview that will show the word the user will be tested on
     private val wordView by lazy {
         findViewById<TextView>(R.id.wordView)
     }
@@ -32,17 +33,31 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        //initialize the viewmodel
         wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
 
+        //Livedata object for the current word
+        //when the word is changed in the viewmodel
+        //this observer will change it in the textview
         wordViewModel.currentSightWord.observe(this, Observer {
             wordView.text = it.word
         })
 
+        wordViewModel.mAllWords.observe(this, Observer {
+            wordViewModel.setWordList(it)
 
+        })
 
+        //the fab starts the speech listener
+        //if the speech is correct the word will be changed to the next word
         fab.setOnClickListener { view ->
             SpeechHelper.getSpeechInput(this).setRecognitionListener(this)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,11 +67,9 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // the settings activity is where the user will go to add new levels and words
         val settingsIntent = Intent(this, SettingsActivity::class.java)
-        var b: Boolean = false
+        var b= false
         when (item.itemId) {
             R.id.action_settings ->
                 startActivity(settingsIntent)
@@ -66,12 +79,10 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
         return b;
     }
 
-
+    //this is the method that catches the speech
+    //checks if it's correct and changes the word if it is
     override fun onResults(p0: Bundle?) {
-        val isCorrect = SpeechHelper.speechResult(p0!!, wordViewModel.currentSightWord.value!!)
-        if (isCorrect){
-            wordViewModel.nextWord()
-        }
+        wordViewModel.checkSpeechIsCorrect(SpeechHelper.speechResult(p0!!, wordViewModel.currentSightWord.value!!))
     }
 
     private fun returnFabAnimation(){
@@ -110,6 +121,8 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     override fun onBeginningOfSpeech() {
     }
 
+    //need to change these to string resources and either change to a snackbar or change the gravity
+    //of the Toast so it doesn't show right on top of the fab
     override fun onError(p0: Int) {
         returnFabAnimation()
         Toast.makeText(this,

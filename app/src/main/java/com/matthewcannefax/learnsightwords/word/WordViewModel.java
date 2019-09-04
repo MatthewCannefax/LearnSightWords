@@ -34,7 +34,7 @@ public class WordViewModel extends AndroidViewModel {
 
     //not really using this currently
     //might try to use in the future instead of wordList
-    private LiveData<List<Word>> mAllWords;
+    public LiveData<List<Word>> mAllWords;
 
     //constructor
     public WordViewModel(Application application){
@@ -45,6 +45,18 @@ public class WordViewModel extends AndroidViewModel {
         wordList = mRepo.getWordList();
         currentSightWord = new MutableLiveData<>();
         setCurrentSightWord();
+    }
+
+    //method that gets a boolean to check if th user's speech was correct
+    //if the speech is correct, the nextWord()method is called
+    public void checkSpeechIsCorrect(boolean isCorrect){
+        if (isCorrect){
+            nextWord();
+        }
+    }
+
+    public void setWordList(List<Word>  words){
+        wordList = words;
     }
 
     //does what it says
