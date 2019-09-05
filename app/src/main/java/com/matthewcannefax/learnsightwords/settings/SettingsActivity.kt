@@ -19,30 +19,32 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var settingsViewModel: SettingsViewModel
 
-    //the spinner that holds Strings for all the levels currently in the database
+    //region VIEWS
     private val levelSpinner by lazy {
+        //the spinner that holds Strings for all the levels currently in the database
         findViewById<Spinner>(R.id.level_spinner)
     }
 
-    //button to add a new level
     private val addLevelButton by lazy {
+        //button to add a new level
         findViewById<ImageButton>(R.id.add_level_button)
     }
 
-    //recycler view that shows all the words for the selected level
     private val wordRecyclerView by lazy {
+        //recycler view that shows all the words for the selected level
         findViewById<RecyclerView>(R.id.word_recyclerview)
     }
 
-    //edittext where the user types a new word to add to the selected level
     private val newWordEditText by lazy {
+        //edittext where the user types a new word to add to the selected level
         findViewById<EditText>(R.id.new_word_edittext)
     }
 
-    //the button that adds the currently typed word to the database under the currently selected level
     private val addNewWordButton by lazy {
+        //the button that adds the currently typed word to the database under the currently selected level
         findViewById<Button>(R.id.add_word_button)
     }
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,46 +58,43 @@ class SettingsActivity : AppCompatActivity() {
             setLevelSpinnerAdapter(it)
         })
 
-        //setup the observer for the current level
-        //when the level is changed the observer will change the list that is displayed in the
-        //recyclerview
         settingsViewModel.currentLevel.observe(this, Observer {
-
-
+            //setup the observer for the current level
+            //when the level is changed the observer will change the list that is displayed in the
+            //recyclerview
         })
+
         settingsViewModel.currentWordList.observe(this, Observer {
             setRecyclerAdapter()
         })
 
-
-        //the click listener for the spinner
-        //when a level is clicked by the user the currentLevel is changed and the observer
-        //will change the list of words displayed inside the recyclerview
         levelSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            //the click listener for the spinner
+            //when a level is clicked by the user the currentLevel is changed and the observer
+            //will change the list of words displayed inside the recyclerview
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
             }
-        }
+        }//end levelSpinner onItemClick
 
-
-        //a new level is added to the database
-        //there is no way to immediately add the level to the database, a new level will only be added
-        //if a word is actually added to the list
         addLevelButton.setOnClickListener{view ->
+            //a new level is added to the database
+            //there is no way to immediately add the level to the database, a new level will only be added
+            //if a word is actually added to the list
             settingsViewModel.addNewLevel()
 
         }
 
-        //the word that is typed by the user in the edittext is added to the currently selected
-        //level in the spinner
         addNewWordButton.setOnClickListener{view ->
+            //the word that is typed by the user in the edittext is added to the currently selected
+            //level in the spinner
             settingsViewModel.addWordToLevel(newWordEditText.text.toString())
         }
 
-    }
+    }//end onCreate
 
     private fun setLevelSpinnerAdapter(levelList: List<Int>){
         val spinnerAdapter = ArrayAdapter<Int>(this, android.R.layout.simple_spinner_dropdown_item, levelList)
