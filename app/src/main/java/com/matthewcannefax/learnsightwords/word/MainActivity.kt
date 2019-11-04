@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.matthewcannefax.learnsightwords.R
 import com.matthewcannefax.learnsightwords.settings.SettingsActivity
 import com.matthewcannefax.learnsightwords.speech.SpeechHelper
@@ -24,8 +26,12 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     private lateinit var wordViewModel: WordViewModel
 
     //the textview that will show the word the user will be tested on
-    private val wordView by lazy {
-        findViewById<TextView>(R.id.wordView)
+//    private val wordView by lazy {
+//        findViewById<TextView>(R.id.wordView)
+//    }
+
+    private val recyclerView by lazy{
+        findViewById<RecyclerView>(R.id.word_recyclerview)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,19 +46,22 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
         //when the word is changed in the viewmodel
         //this observer will change it in the textview
         wordViewModel.currentSightWord.observe(this, Observer {
-            wordView.text = it.word
+//            wordView.text = it.word
         })
 
         wordViewModel.mAllWords.observe(this, Observer {
             wordViewModel.setWordList(it)
-
+            val adapter = WordGameRecyclerAdapter(it)
+            recyclerView.adapter = adapter
+//            recyclerView.layoutManager = GridLayoutManager(this, 3)
+            recyclerView.layoutManager = AutoFitGridLayoutManager(this, 500, it.size)
         })
 
         //the fab starts the speech listener
         //if the speech is correct the word will be changed to the next word
-        fab.setOnClickListener { view ->
-            SpeechHelper.getSpeechInput(this).setRecognitionListener(this)
-        }
+//        fab.setOnClickListener { view ->
+//            SpeechHelper.getSpeechInput(this).setRecognitionListener(this)
+//        }
     }
 
     override fun onResume() {
@@ -86,16 +95,16 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
     }
 
     private fun returnFabAnimation(){
-        fab.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_mic_empty
-        ))
+//        fab.setImageDrawable(ContextCompat.getDrawable(this,
+//            R.drawable.ic_mic_empty
+//        ))
     }
 
     //animate the mic button here
     override fun onReadyForSpeech(p0: Bundle?) {
-        fab.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_mic
-        ))
+//        fab.setImageDrawable(ContextCompat.getDrawable(this,
+//            R.drawable.ic_mic
+//        ))
     }
 
     //animate the mic button here too
