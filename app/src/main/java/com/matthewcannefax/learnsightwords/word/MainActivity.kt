@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -14,7 +16,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.matthewcannefax.learnsightwords.ITEM_HEIGHT
 import com.matthewcannefax.learnsightwords.R
+import com.matthewcannefax.learnsightwords.sample.SampleWords
 import com.matthewcannefax.learnsightwords.settings.SettingsActivity
 import com.matthewcannefax.learnsightwords.speech.SpeechHelper
 
@@ -54,7 +58,13 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
             val adapter = WordGameRecyclerAdapter(it)
             recyclerView.adapter = adapter
 //            recyclerView.layoutManager = GridLayoutManager(this, 3)
-            recyclerView.layoutManager = AutoFitGridLayoutManager(this, 500, it.size)
+
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val screenHeight = displayMetrics.heightPixels
+            val screenWidth = displayMetrics.widthPixels
+            recyclerView.layoutManager = AutoFitGridLayoutManager(this, 500, SampleWords.getWordList().size, screenHeight, screenWidth, getPXFromDP(
+                ITEM_HEIGHT))
         })
 
         //the fab starts the speech listener
@@ -62,6 +72,10 @@ class MainActivity : AppCompatActivity(), RecognitionListener{
 //        fab.setOnClickListener { view ->
 //            SpeechHelper.getSpeechInput(this).setRecognitionListener(this)
 //        }
+    }
+
+    fun getPXFromDP(dp: Int): Int{
+         return (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics)).toInt()
     }
 
     override fun onResume() {

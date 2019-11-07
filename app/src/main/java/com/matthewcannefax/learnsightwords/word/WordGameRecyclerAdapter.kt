@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.matthewcannefax.learnsightwords.ITEM_HEIGHT
 import com.matthewcannefax.learnsightwords.R
 
 class WordGameRecyclerAdapter(val wordList: List<Word>) : RecyclerView.Adapter<WordGameRecyclerAdapter.WordGameViewHolder>(){

@@ -59,6 +59,10 @@ public class WordViewModel extends AndroidViewModel {
         wordList = words;
     }
 
+    public List<Word> getWordList(){
+        return wordList;
+    }
+
     //does what it says
     private void setCurrentSightWord(){
         currentSightWord.setValue(wordList.get(currentIndex));
